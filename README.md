@@ -1,6 +1,7 @@
 # Projected Coupled Diffusion (PCD)
 
 [![Paper](https://img.shields.io/badge/arXiv-2508.10531-B31B1B)](https://arxiv.org/abs/2508.10531)
+[![Paper](https://img.shields.io/badge/OpenReview-1FEm5JLpvg-FFA500)](https://openreview.net/forum?id=1FEm5JLpvg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 [Hao Luan](https://edmundluan.github.io)<sup>1</sup>, 
@@ -23,11 +24,13 @@ Empirically, we demonstrate the effectiveness of PCD in application scenarios of
 
 
 ## 🔨 Usage
-Please see specific instructions in the folders [Toy-Example](./toy_example/), [Multi-Robot](./multi_robot), [PushT](./pusht), and [Image-Pair](./image_pair), respectively. 
+Please see specific instructions in the folders [Toy-Example](./toy_example/README.md), [Multi-Robot](./multi_robot/README.md), [PushT](./pusht/README.md), and [Image-Pair](./image_pair/README.md), respectively. 
 
 
+<!--
 ## 📄 Appendix
 This repository also contains the extended version of our paper with [appendix](./appendix/pcd_appendix.pdf). 
+-->
 
 
 ## 🏷️ License
@@ -43,10 +46,11 @@ This repository is released under the MIT license. See [LICENSE](LICENSE) for ad
 ## ✏️ Citation 
 If you find this repo or the ideas presented in our paper useful for your research, please consider citing our paper.
 ```
-@article{luan2025projected, 
-  title={Projected Coupled Diffusion for Test-Time Constrained Joint Generation},
-  author={Luan, Hao and Goh, Yi Xian and Ng, See-Kiong and Ling, Chun Kai},
-  journal={arXiv preprint arXiv:2508.10531},
-  year={2025}
+@inproceedings{luan2026projected,
+    title={Projected Coupled Diffusion for Test-Time Constrained Joint Generation},
+    author={Hao Luan and Yi Xian Goh and See-Kiong Ng and Chun Kai Ling},
+    booktitle={The Fourteenth International Conference on Learning Representations},
+    year={2026},
+    url={https://openreview.net/forum?id=1FEm5JLpvg}
 }
 ```
