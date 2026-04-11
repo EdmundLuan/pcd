@@ -1,0 +1,15 @@
+name: pcdmmd
+channels:
+  - pytorch
+  - conda-forge
+dependencies:
+  - python=3.8
+  - pip
+  - patchelf
+  - pip:
+      - pyyaml
+      - matplotlib
+      - setuptools==70.2.0
+      - ml-collections==0.1.1
+      - gdown
+      - tqdm
