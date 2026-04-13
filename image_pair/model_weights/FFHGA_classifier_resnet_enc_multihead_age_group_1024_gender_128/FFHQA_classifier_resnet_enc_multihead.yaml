@@ -1,0 +1,83 @@
+device:
+  device: "cuda:0"
+  deterministic: True
+
+output_dir: "outputs/ldm_train/base_classifier_resnet_enc_multihead_age_group_1024"
+
+wandb:
+  use: True
+  # use: False
+  project: "FFHQ_Aging_ldm"
+  name: "base_classifier_resnet_enc_multihead_age_group_1024"
+
+data:
+  images_dir          : "ffhq_aging_2/images/images512x512"
+  label_json_filepath : "ffhq_aging_2/labels/ffhq_aging_labels.json"
+  train_images        : "00000 - 68999"  # as per original paper: https://arxiv.org/pdf/2003.09764v2
+  test_images         : "69000 - 69999"  # as per original paper: https://arxiv.org/pdf/2003.09764v2
+  age_group_classes:
+    - "0-2"
+    - "3-6"
+    - "7-9"
+    - "10-14"
+    - "15-19"
+    - "20-29"
+    - "30-39"
+    - "40-49"
+    - "50-69"
+    - "70-120"
+  gender_classes:
+    - "male"
+    - "female"
+  age_group_conf_thres : 0.6   # as per original paper: https://arxiv.org/pdf/2003.09764v2
+  gender_conf_thres    : 0.66  # as per original paper: https://arxiv.org/pdf/2003.09764v2
+  img_height           : 512
+  img_width            : 512
+  img_format           : "png"
+  reweight_class_loss  : "inv_class_freq"
+  smoothing_factor     : 0.5   # [0., 1.]  1. is essentially disabling: w := w ** factor
+  dataloader_num_workers: 24
+
+
+# this classifier is LDM specific
+classifier:
+  ldm_id              : "stabilityai/stable-diffusion-2-1-base"
+  in_channels         : 3  # (1, 3, 512, 512)
+  backbone            : "resnet18"
+  pretrained_backbone : True
+  timestep_condition  : False
+  head_configs        :
+    age_group:
+      num_classes : 10
+      hidden_dim  : 1024
+      dropout_p   : 0.2
+      loss_weight : 10
+    gender:
+      num_classes : 2
+      hidden_dim  : 128
+      dropout_p   : 0.2
+      loss_weight : 2
+
+
+training:
+  seed                   : 3407
+  batch_size             : 16        # 64:train=840;   100:train=540;   128:train=420;   256:train=210;   512:train=100;
+  epochs                 : 200
+  lr_scheduler           : "reduce_on_plateau" # constant | reduce_on_plateau | cosine_with_warmup | constant_with_warmup
+  lr                     : 1e-3       # Initial lr
+  lr_rop_patience        : 3          # ReduceLROnPlateau
+  lr_rop_factor          : 0.95       # lr reduction factor
+  lr_rop_min             : 1e-6
+  lr_cosw_warmup_steps   : 6800       # ~ 10% (epochs * batch_size)
+  lr_cosw_max_train_steps: 168000      # epochs * batch_size
+  lr_cosw_cosine_cycles  : 0.5
+  lr_cosw_last_epoch     : -1
+  lr_conw_warmup_steps   : 6800       # ~ 10% (epochs * batch_size)
+  sample_test_count      : 10        # Number of samples to visualise after each epoch
+
+
+value_range:
+  data_min: -1.0  # transforms.Normalize([0.5]*3, [0.5]*3)
+  data_max:  1.0  # transforms.Normalize([0.5]*3, [0.5]*3)
+  model_min: 0.0
+  model_max: 1.0
