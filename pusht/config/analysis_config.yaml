@@ -1,0 +1,40 @@
+# -------------------
+# ANALYSIS CONFIG
+# -------------------
+
+# List of data directories to process. The script will loop through each directory.
+log_paths:
+  - "logs/tests/event_logs/eval_runs-some_tags.log"
+  - "logs/tests/event_logs/eval_runs-some_other_tags.log"
+
+
+# Switches for plotting and saving figures/data.
+switches:
+  plot_trajectories: false
+  plot_velocity_stats: true
+  save_plots: true
+
+  save_stats_json: true
+  
+# General constants and parameters for the analysis.
+constants:
+  EPS: 1.0e-6
+  VEL_TOL: 5.0e-4  # Tolerance for velocity checks
+  DT: 0.01  # time step size
+  SAFE_DIST: 30.0
+  ACTION_HORIZON: 8
+  MAX_ACTION: [511.9651, 511.9563]
+  MIN_ACTION: [0.0091, 0.2790]
+  # DEFAULT_MAX_VEL: 6.2  # Default maximum velocity threshold (80% of max action)
+  DEFAULT_MAX_VEL: 8.4  # (90% of max action)
+  # DEFAULT_MAX_VEL: 10.7  # (95% of max action)
+  VEL_HIST_QUANTILES: [0.75, 0.8, 0.9, 0.95, 0.99]
+  
+# Plotting-specific parameters.
+plotting:
+  # Trajectory plotting settings
+  traj_plot_xlim: [0, 550]
+  traj_plot_ylim: [0, 550]
+  traj_plot_h_end: 48
+  # Velocity histogram settings
+  vel_hist_bins: 100

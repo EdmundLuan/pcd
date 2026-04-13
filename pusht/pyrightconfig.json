@@ -1,0 +1,11 @@
+{
+    "exclude": [
+        "data/**",
+        "data_local/**",
+        "outputs/**"
+    ],
+    "typeCheckingMode": "off",  // "off", "strict", "basic"
+    "reportMissingImports": "warning",
+    "reportGeneralTypeIssues": "warning",
+    "reportOptionalMemberAccess": "none"
+}
