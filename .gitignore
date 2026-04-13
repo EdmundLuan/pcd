@@ -212,3 +212,4 @@ __marimo__/
 
 # Model Weights
 *.pt
+image_pair/outputs/*

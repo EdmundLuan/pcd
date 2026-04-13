@@ -386,15 +386,11 @@ def main(args):
         cfg_guidance_scale          = args.sd_cfg_guidance_scale,
         noise_std_scaling_factor    = args.noise_std_scaling_factor,
     )
+    del intermediates
+    
     
     # [[bs,3,H,W], ..]  value range: [0., 1.]
-    batch_x_0 = recursive_to(batch_x_0, to_device="cpu", to_dtype=torch.float)
-    
-    # [[T,bs,3,H,W], ..]  value range: [0., 1.]
-    intermediates = recursive_to(intermediates, to_device="cpu", to_dtype=torch.float)
-    for k in intermediates.keys():
-        intermediates[k] = [torch.stack(i, dim=0) for i in intermediates[k]]
-    
+    batch_x_0 = recursive_to(batch_x_0, to_device="cpu", to_dtype=torch.float)    
     
     duration = time.time() - time_start
     
@@ -434,8 +430,6 @@ def main(args):
         # save batch_x_0
         torch.save(batch_x_0_i, os.path.join(f"{args.outputs_dir}", method, f"samples_model_{i}_{exemplar_classes_str[i]}.pt"))
         
-    del intermediates
-    
     # ====================================================================================================
     # ====================================================================================================
     

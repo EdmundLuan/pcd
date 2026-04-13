@@ -15,8 +15,10 @@ DEVICE="cuda:0"   # cuda:0 | cuda | cpu
 
 
 # LDM
-SD_MODEL_ID="stabilityai/stable-diffusion-2-1-base"
-SD_NUM_STEPS=10 # 1-999
+# SD_MODEL_ID="stabilityai/stable-diffusion-2-1-base"  ## NOTE: the original model is no longer available as of April 2026, below are alternative forked versions of it.
+# SD_MODEL_ID="Manojb/stable-diffusion-2-1-base"
+SD_MODEL_ID="PIEthonista/stable-diffusion-2-1-base"
+SD_NUM_STEPS=100 # 1-999
 SD_SAMPLE_HEIGHT=512
 SD_SAMPLE_WIDTH=512
 SD_LATENT_HEIGHT=64
